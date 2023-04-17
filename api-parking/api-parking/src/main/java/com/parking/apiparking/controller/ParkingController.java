@@ -4,10 +4,7 @@ import com.parking.apiparking.entities.Car;
 import com.parking.apiparking.service.ParkingService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,8 +25,8 @@ public class ParkingController {
         return ResponseEntity.ok(this.parkingService.getAllCars());
     }
 
-    @PostMapping("/cars") //  POST http://dominio/parking/cars ==> Obtener la lista de carros
-    public ResponseEntity<Car> addCar(Car car) {
+    @PostMapping("/cars") //  POST http://dominio/parking/cars ==>
+    public ResponseEntity<Car> addCar(@RequestBody Car car) {
         this.parkingService.addCar(car);
         return new ResponseEntity<>(car, HttpStatus.CREATED); //CREATED = 201
     }

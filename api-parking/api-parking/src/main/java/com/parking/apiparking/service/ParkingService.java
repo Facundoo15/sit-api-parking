@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ParkingService {
@@ -22,13 +24,20 @@ public class ParkingService {
         return this.parkingLot;
     }
 
-    // TODO: US2 Como usuario, quiero poder buscar un auto por su placa, para poder encontrar
-    //rápidamente un vehículo en particular.
+    // TODO: US2 Como usuario, quiero poder buscar un auto por su placa, para poder encontra rápidamente un vehículo en particular.
+    public Optional<Car> getCarByLicense(String license){
+        return parkingLot.stream().filter(e ->  e.getLicensePlate().equalsIgnoreCase(license)).findFirst();
+    }
+    // TODO: US3 Como usuario, quiero poder buscar autos por su color, para poder encontrar todos los vehículos de un mismo color en el estacionamiento.
+    public List<Car> getCarsByLicense(String color){
+        return parkingLot.stream().filter(e -> e.getColor().equals(color)).toList();
+    }
 
-    // TODO: US4 Como usuario, quiero poder agregar un auto al parqueo, para poder estacionar
-    //mi vehículo.
+    // TODO: US4 Como usuario, quiero poder agregar un auto al parqueo, para poder estacionar mi vehículo.
     public void addCar(Car car){
         this.parkingLot.add(car);
     }
+
+    
 
 }
