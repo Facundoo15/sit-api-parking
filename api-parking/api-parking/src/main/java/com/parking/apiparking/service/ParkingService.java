@@ -3,6 +3,7 @@ package com.parking.apiparking.service;
 import com.parking.apiparking.entities.Car;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,6 +39,20 @@ public class ParkingService {
         this.parkingLot.add(car);
     }
 
+
+
+    // Método para eliminar un auto por la licencia
+    public boolean removeCarbyLicense(String license){
+        return this.parkingLot.removeIf(e -> e.getLicensePlate().equalsIgnoreCase(license));
+    }
+
+    // Método para parkear un auto y asignarle su hora de ingreso
+    public void parkCar(Car car){
+        car.setEntryTime(LocalDateTime.now());
+        addCar(car);
+    }
+
     
+
 
 }
